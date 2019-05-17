@@ -12,6 +12,35 @@
         <span class="genre">{{genre}}</span>
       </div>
       <p>{{plot}}</p>
+      <div class="comment comment--saved" *ngIf="commentSaved; else comment">
+        <span>
+          Comment:
+        </span>
+        <p>
+          {{movieComment}}
+        </p>
+      </div>
+      <ng-template class="comment" #comment>
+        <div class="input-field">
+          <textarea
+            class="materialize-textarea"
+            [(ngModel)]="movieComment"
+          ></textarea>
+          <label>Comment</label>
+          <div class="wordcount" [ngStyle]="{color: movieComment.trim().length === 0 ? 'firebrick' : 'lightseagreen'}">
+            {{wordCount()}} words
+          </div>
+        </div>
+      </ng-template>
+      <div class="card-action">
+        <button
+          class="btn-flat"
+          [disabled]="movieComment.trim().length === 0"
+          (click)="saveComment()"
+        >
+          {{commentSaved ? 'Edit' : 'Save'}} comment
+        </button>
+      </div>
     </div>
   </div>
 </div>
