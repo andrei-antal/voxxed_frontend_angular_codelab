@@ -1,0 +1,26 @@
+.card {
+  width: 700px;
+  padding: .75em .25em;
+}
+
+.card .card-content {
+  padding: .5em;
+}
+
+.card .card-content .card-title {
+  margin-bottom: 0;
+}
+
+.card-header {
+  border-bottom: 1px solid lightgray;
+  margin-bottom: 1em;
+}
+
+.year {
+  font-size: .75em;
+}
+
+.genre {
+  display: block;
+  font-size: 1em;
+}
