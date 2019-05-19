@@ -17,6 +17,15 @@ export class MovieListComponent implements OnInit {
 
   ngOnInit() {
     this.movies$ = this.movieService.getMovies();
+    this.movieService.loadAll();
+    fromEvent(this.searchField.nativeElement, 'input')
+      .pipe(
+        debounceTime(300),
+        map((event: any) => event.target.value),
+      )
+    .subscribe(searchTerm => {
+      this.movieService.searchMovie(searchTerm);
+    });
   }
 
   handleCommentUpdate(commentPayload) {

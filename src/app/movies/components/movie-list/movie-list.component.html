@@ -3,9 +3,16 @@
   <input type="text" class="validate" #searchField>
   <label>Search movies</label>
 </div>
-<app-movie-item
-  *ngFor="let movie of (movies$ | async)"
-  [movie]="movie"
-  (commentUpdate)="handleCommentUpdate($event)"
-  (movieDelete)="handleMovieDelete($event)"
-></app-movie-item>
+<ng-container *ngIf="(movies$ | async) as movies">
+  <div *ngIf="movies.length; else empty">
+    <app-movie-item
+      *ngFor="let movie of movies"
+      [movie]="movie"
+      (commentUpdate)="handleCommentUpdate($event)"
+      (movieDelete)="handleMovieDelete($event)"
+    ></app-movie-item>
+  </div>
+  <ng-template #empty>
+    No movies found
+  </ng-template>
+</ng-container>
