@@ -1,5 +1,10 @@
+<div class="search input-field">
+  <i class="material-icons prefix">search</i>
+  <input type="text" class="validate" #searchField>
+  <label>Search movies</label>
+</div>
 <app-movie-item
-  *ngFor="let movie of movies"
+  *ngFor="let movie of (movies$ | async)"
   [movie]="movie"
   (commentUpdate)="handleCommentUpdate($event)"
   (movieDelete)="handleMovieDelete($event)"
