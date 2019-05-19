@@ -1,4 +1,4 @@
-<div class="card horizontal row" *ngFor="let movie of movies">
+<div class="card horizontal row">
   <div class="card-image col s3">
     <img src="{{movie.poster}}">
   </div>
@@ -12,33 +12,33 @@
         <span class="genre">{{movie.genre}}</span>
       </div>
       <p>{{movie.plot}}</p>
-      <div class="comment comment--saved" *ngIf="movie.commentSaved; else comment">
+      <div class="comment comment--saved" *ngIf="commentSaved; else comment">
         <span>
           Comment:
         </span>
         <p>
-          {{movie.comment}}
+          {{movieComment}}
         </p>
       </div>
       <ng-template class="comment" #comment>
         <div class="input-field">
           <textarea
             class="materialize-textarea"
-            [(ngModel)]="movie.comment"
+            [(ngModel)]="movieComment"
           ></textarea>
           <label>Comment</label>
-          <div class="wordcount" [ngStyle]="{color: movie.comment.trim().length === 0 ? 'firebrick' : 'lightseagreen'}">
-            {{wordCount(movie.comment)}} words
+          <div class="wordcount" [ngStyle]="{color: movieComment.trim().length === 0 ? 'firebrick' : 'lightseagreen'}">
+            {{wordCount(movieComment)}} words
           </div>
         </div>
       </ng-template>
       <div class="card-action">
         <button
           class="btn-flat"
-          [disabled]="movie.comment.trim().length === 0"
+          [disabled]="movieComment.trim().length === 0"
           (click)="saveComment(movie.id)"
         >
-          {{movie.commentSaved ? 'Edit' : 'Save'}} comment
+          {{commentSaved ? 'Edit' : 'Save'}} comment
         </button>
       </div>
     </div>
