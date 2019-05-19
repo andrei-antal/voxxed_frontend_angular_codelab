@@ -40,6 +40,12 @@
         >
           {{commentSaved ? 'Edit' : 'Save'}} comment
         </button>
+        <a
+          class="btn indigo accent-2"
+          [routerLink]="['/movies', movie.id]"
+        >
+          Edit movie
+        </a>
         <button
           class="btn deep-orange"
           (click)="handleDelete()"
