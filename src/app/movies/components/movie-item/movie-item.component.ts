@@ -10,7 +10,6 @@ export class MovieItemComponent implements OnInit {
   @Output() commentUpdate = new EventEmitter();
   commentSaved;
   movieComment;
-  movieRating = 1;
 
   ngOnInit() {
     this.movieComment = this.movie.comment;
@@ -26,16 +25,5 @@ export class MovieItemComponent implements OnInit {
       this.commentUpdate.emit(payload);
     }
     this.commentSaved = !this.commentSaved;
-  }
-
-  wordCount(comment) {
-    if (!comment || comment.length === 0) {
-      return 0;
-    } else {
-      return comment
-        .trim()
-        .replace(/  +/g, ' ')
-        .split(' ').length;
-    }
   }
 }

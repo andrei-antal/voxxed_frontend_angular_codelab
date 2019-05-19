@@ -51,6 +51,7 @@ export class MovieListComponent implements OnInit {
 
   handleCommentUpdate(commentPayload) {
     const index = this.movies.findIndex(movie => movie.id === commentPayload.id);
+    console.log('here', index)
     this.movies[index] = {
       ...this.movies[index],
       comment: commentPayload.newComment
