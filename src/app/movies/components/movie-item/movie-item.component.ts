@@ -8,8 +8,10 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class MovieItemComponent implements OnInit {
   @Input() movie;
   @Output() commentUpdate = new EventEmitter();
+  @Output() movieDelete = new EventEmitter();
   commentSaved;
   movieComment;
+  movieRating = 1;
 
   ngOnInit() {
     this.movieComment = this.movie.comment;
@@ -25,5 +27,9 @@ export class MovieItemComponent implements OnInit {
       this.commentUpdate.emit(payload);
     }
     this.commentSaved = !this.commentSaved;
+  }
+
+  handleDelete() {
+    this.movieDelete.emit(this.movie.id);
   }
 }
