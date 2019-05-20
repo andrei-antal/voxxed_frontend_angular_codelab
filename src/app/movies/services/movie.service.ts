@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Movie } from '../model/movie';
 
@@ -12,6 +12,22 @@ export class MovieService {
   private apiUrl = 'http://localhost:3000/movies';
 
   constructor(private http: HttpClient) {}
+
+  getBook(movieId): Observable<Movie> {
+    if (!movieId) {
+      return of({
+        id: null,
+        title: '',
+        genre: '',
+        plot: '',
+        year: null,
+        comment: '',
+        poster: '',
+      });
+    }
+    return this.http
+      .get<Movie>(`${this.apiUrl}/${movieId}`);
+  }
 
   getMovies() {
     return this.movies.asObservable();
@@ -51,5 +67,15 @@ export class MovieService {
       .subscribe(data => {
         this.movies.next(data);
       });
+  }
+
+  createMovie(movie) {
+    return this.http
+      .post(`${this.apiUrl}`, movie);
+  }
+
+  updateMovie(movie) {
+    return this.http
+      .put(`${this.apiUrl}/${movie.id}`, movie);
   }
 }
